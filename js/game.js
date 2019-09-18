@@ -53,14 +53,21 @@ function styleGrid() {
 
 /**
  * Sketches the cells of the grid with a random color when you place your mouse
- * over a cell.
+ * over a white cell. If the cell is not white, the current cell color 
+ * will darken by 10% with each pass.
  */
 function sketchGrid() {
     let colDiv = document.querySelectorAll('.col');
     colDiv.forEach((col) => {
         col.addEventListener('mouseover', () => {
-            let randomColor = Math.floor(Math.random() * 16777215).toString(16);
-            col.setAttribute('style', `background: #${randomColor}`);
+            let color;
+            if ((col.style.backgroundColor) === '') {
+                color = tinycolor.random();
+            } else {
+                color = tinycolor(`${col.style.backgroundColor}`).darken();
+            }
+
+            col.setAttribute('style', `background: ${color}`);
         });
     });
 }
