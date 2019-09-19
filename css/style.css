@@ -39,12 +39,22 @@ body {
     display: inline-block;
     font-size: 1.2em;
     margin: 4px 2px;
+    opacity: 0.65;
     padding: 15px 32px;
     text-align: center;
+    transition: 0.5s;
+}
+
+.btn:hover {
+    opacity: 1;
 }
 
 .btn:focus {
     outline: none;
+}
+
+#btn-clear {
+    background: #ec1629;
 }
 
 /* For tablets and desktops */

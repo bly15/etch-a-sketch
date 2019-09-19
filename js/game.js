@@ -1,5 +1,7 @@
 window.onload = play;
 
+const CLEAR_BUTTON = document.querySelector('#btn-clear');
+const RESIZE_BUTTON = document.querySelector('#btn-resize');
 const DEFAULT_GRID_SIZE = 16;
 let gridSize = DEFAULT_GRID_SIZE;
 
@@ -8,9 +10,17 @@ let gridSize = DEFAULT_GRID_SIZE;
  */
 function play() {
     createGrid();
-    //styleGrid();  // Styled in 'style.css'
     sketchGrid();
-    clearGrid();
+    
+    CLEAR_BUTTON.addEventListener('click', () => {
+        clearGrid();
+        play();
+    });
+
+    RESIZE_BUTTON.addEventListener('click', () => {
+        resizeGrid();
+        play();
+    });
 }
 
 /**
@@ -31,24 +41,6 @@ function createGrid() {
 
         container.append(rowDiv);
     }
-}
-
-/**
- * Styles the grid
- */
-function styleGrid() {
-    let container = document.querySelector('.container');
-    container.setAttribute('style', 'display: table; position: absolute; top: 50%; transform: translateX(50%) translateY(-50%); width: 50%');
-
-    let rowDiv = document.querySelectorAll('.row');
-    rowDiv.forEach((row) => {
-        row.setAttribute('style', 'display: table-row; width: 100%');
-    });
-
-    let colDiv = document.querySelectorAll('.col');
-    colDiv.forEach((col) => {
-        col.setAttribute('style', 'border: solid; display: table-cell; padding: 2%');
-    });
 }
 
 /**
@@ -73,20 +65,21 @@ function sketchGrid() {
 }
 
 /**
- * Clears the grid, prompts the user for a new grid size, and regenerates a
- * grid of said size.
+ * Prompts the user for a new grid size, and generates a grid of said size
+ */
+function resizeGrid() {
+    clearGrid();
+    promptGridSize();
+}
+
+/**
+ * Clears the grid
  */
 function clearGrid() {
-    let clearButton = document.querySelector('#btn-clear');
-    clearButton.addEventListener('click', () => {
-        let container = document.querySelector('.container');
-        while (container.firstChild) {
-            container.removeChild(container.firstChild);
-        }
-
-        promptGridSize();
-        play();
-    });
+    let container = document.querySelector('.container');
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
 }
 
 /**
