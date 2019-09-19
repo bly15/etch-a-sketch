@@ -1,7 +1,5 @@
 window.onload = play;
 
-const CLEAR_BUTTON = document.querySelector('#btn-clear');
-const RESIZE_BUTTON = document.querySelector('#btn-resize');
 const DEFAULT_GRID_SIZE = 16;
 let gridSize = DEFAULT_GRID_SIZE;
 
@@ -11,16 +9,6 @@ let gridSize = DEFAULT_GRID_SIZE;
 function play() {
     createGrid();
     sketchGrid();
-    
-    CLEAR_BUTTON.addEventListener('click', () => {
-        clearGrid();
-        play();
-    });
-
-    RESIZE_BUTTON.addEventListener('click', () => {
-        resizeGrid();
-        play();
-    });
 }
 
 /**
@@ -68,18 +56,24 @@ function sketchGrid() {
  * Prompts the user for a new grid size, and generates a grid of said size
  */
 function resizeGrid() {
-    clearGrid();
     promptGridSize();
+
+    let container = document.querySelector('.container');
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+
+    play();
 }
 
 /**
  * Clears the grid
  */
 function clearGrid() {
-    let container = document.querySelector('.container');
-    while (container.firstChild) {
-        container.removeChild(container.firstChild);
-    }
+    let colDiv = document.querySelectorAll('.col');
+    colDiv.forEach((col) => {
+        col.style.backgroundColor = '';
+    });
 }
 
 /**
@@ -93,3 +87,13 @@ function promptGridSize() {
 
     gridSize = newGridSize;
 }
+
+let resizeButton = document.querySelector('#btn-resize');
+resizeButton.addEventListener('click', () => {
+    resizeGrid();
+});
+
+let clearButton = document.querySelector('#btn-clear');
+clearButton.addEventListener('click', () => {
+    clearGrid();
+});
