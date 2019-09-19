@@ -3,16 +3,17 @@ body {
 }
 
 #header {
-    font-size: 1.5em;
+    font-family: 'Satisfy', cursive;
+    font-size: 1.7em;
     text-align: center;
 }
 
 .container {
     border: solid;
     display: table;
-    height: 480px;
-    margin: 0 auto;
-    width: 480px;
+    height: 360px;
+    margin: 15% auto;
+    width: 90%;
 }
 
 .row {
@@ -23,11 +24,10 @@ body {
 .col {
     border: thin solid;
     display: table-cell;
-    padding: 2%;
 }
 
 .btn-group {
-    margin: 2% auto;
+    margin: 5% auto;
     text-align: center;
 }
 
@@ -45,4 +45,17 @@ body {
 
 .btn:focus {
     outline: none;
+}
+
+/* For tablets and desktops */
+@media only screen and (min-width: 600px) {
+    .container {
+        height: 480px;
+        margin: 0 auto;
+        width: 480px;
+    }
+
+    .btn-group {
+        margin: 2% auto;
+    }
 }
