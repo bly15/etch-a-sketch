@@ -33,8 +33,9 @@ function createGrid() {
 
 /**
  * Sketches the cells of the grid with a random color when you place your mouse
- * over a white cell. If the cell is not white, the current cell color 
- * will darken by 10% with each pass.
+ * over an uncolored cell. If the cell already has color, then the current 
+ * cell color will darken by 10% with each pass; the cell will eventually
+ * turn black. We use the TinyColor API to get and darken colors.
  */
 function sketchGrid() {
     let colDiv = document.querySelectorAll('.col');
